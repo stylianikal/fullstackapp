@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './app.css';
 
 class App extends Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class App extends Component {
             const data = await response.json();
             this.setState({ weather: data, error: null });
         } catch (error) {
-            console.error('Error fetching weather data:', error.message); // Debugging log
+            console.error('Error fetching weather data:', error.message); 
             this.setState({ error: 'City not found or API error.', weather: null });
         }
     };
@@ -41,8 +42,8 @@ class App extends Component {
         if (!weather) return null;
 
         return (
-            <div style={{ marginTop: '20px', textAlign: 'left' }}>
-                <h2 style={{ color: 'pink' }}>Weather Details:</h2>
+            <div className="weather-box">
+                <h2>Weather Details:</h2>
                 <p><strong>City:</strong> {weather.name}</p>
                 <p><strong>Country:</strong> {weather.sys.country}</p>
                 <p><strong>Temperature:</strong> {weather.main.temp}°C</p>
@@ -57,8 +58,9 @@ class App extends Component {
         const { city, error } = this.state;
 
         return (
-            <div style={{ textAlign: 'center', marginTop: '50px' }}>
-                <h1>OpenWeatherMap API</h1>
+            <div className="app-container">
+                <h1>OpenWeatherMap API Vs GeoNames API</h1>
+                <div className="input-container">
                 <input
                     style={{ margin: '24px' }}
                     type="text"
@@ -67,7 +69,8 @@ class App extends Component {
                     placeholder="Enter city name"
                 />
                 <button onClick={this.fetchWeather}>Get Weather</button>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                </div>
+                {error && <p className="error-message">{error}</p>}
                 {this.renderWeatherDetails()}
             </div>
         );
