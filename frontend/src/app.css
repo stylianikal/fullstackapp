@@ -32,7 +32,7 @@ input {
 
 button {
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color: #e666fc;;
     color: white;
     border: none;
     border-radius: 5px;
@@ -43,7 +43,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #f8a4ed;
 }
 
 .error-message {
@@ -54,14 +54,14 @@ button:hover {
 .weather-box {
     margin-top: 20px;
     text-align: left;
-    background-color: #e8f5e9;
+    background-color: #e7dfeb;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .weather-box h2 {
-    color: #388e3c;
+    color: #e666fc;
 }
 
 .weather-box p {
