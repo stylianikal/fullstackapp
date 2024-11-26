@@ -9,7 +9,7 @@ const PORT = 8000;
 app.use(cors());
 app.use(express.json());
 
-app.get('/api/data', async (req, res) => {
+app.get('/api/weather', async (req, res) => {
     const { city } = req.query;
 
     if (!city) {

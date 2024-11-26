@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './app.css';
-import { Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 
 class App extends Component {
     constructor(props) {
@@ -10,6 +10,7 @@ class App extends Component {
             weather: null,
             geodata: null,
             error: null,
+            loading: false,
         }
     }
 
@@ -26,12 +27,13 @@ class App extends Component {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/api/data?city=${city}`)
+            const response = await fetch(`http://localhost:8000/api/weather?city=${city}`)
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`)
             }
             const data = await response.json();
             this.setState({ weather: data, error: null })
+            this.fetchGeodata()
         } catch (error) {
             console.error('Error fetching weather data:', error.message)
             this.setState({ error: 'City not found or OpenWeather API error.', weather: null })
@@ -56,7 +58,18 @@ class App extends Component {
             this.setState({ error: 'City not found or Geonames API error.', weather: null })
         }
     }
-    
+
+   
+    renderLoading() {
+        const { loading } = this.state;
+    if (!loading) return null;
+
+    return (
+        <div className='loading-indicator'>
+            <CircularProgress />
+        </div>
+    );
+    }
 
     // Render weather details
     renderWeatherDetails() {
@@ -69,8 +82,8 @@ class App extends Component {
                 <Typography>City:{weather.name}</Typography>
                 <Typography>Temperature: {weather.main.temp}°C</Typography>
                 <Typography>Description: {weather.weather[0].description}</Typography>
-                <Typography>Longitude: {weather.coord.lon}</Typography>
-                <Typography>Latitude: {weather.coord.lat}</Typography>
+                {/* <Typography>Longitude: {weather.coord.lon}</Typography>
+                <Typography>Latitude: {weather.coord.lat}</Typography> */}
             </div>
         )
     }
@@ -92,6 +105,7 @@ class App extends Component {
 
     }
 
+    
     render() {
         const { city, error } = this.state
 
@@ -106,9 +120,10 @@ class App extends Component {
                     onChange={this.handleInputChange}
                     placeholder="Enter city name"
                 />
-                <button onClick={this.fetchWeather}>Get Weather</button>
-                <button onClick={this.fetchGeodata}>Get Geodata</button>
+                {/* <button onClick={this.fetchWeather}>Get Weather</button> */}
+                <button onClick={ this.fetchWeather}>Get Weather and Geodata</button>
                 </div>
+                {this.renderLoading()}
                 {error && <p className="error-message">{error}</p>}
                 {this.renderWeatherDetails()}
                 {this.renderGeoNames()}
