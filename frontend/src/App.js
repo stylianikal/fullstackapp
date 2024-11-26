@@ -90,7 +90,6 @@ class App extends Component {
 
     renderGeoNames(){
         const {geodata} = this.state
-        console.log('---',geodata)
         if(!geodata){
             return null
         }

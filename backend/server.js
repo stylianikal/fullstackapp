@@ -24,7 +24,6 @@ app.get('/api/weather', async (req, res) => {
             },
         });
         res.json(response.data);
-        console.log(response.data);
     } catch (error) {
         console.error('Error fetching weather data:', error.message); // Debug: Log errors
         res.status(500).json({
@@ -48,7 +47,6 @@ app.get('/api/geodata', async(req, res) =>{
             },
         });
         res.json(response.data);
-        console.log(response.data);
     } catch(error){
         console.error('Error fetching geo data:', error.message); // Debug: Log errors
         res.status(500).json({
