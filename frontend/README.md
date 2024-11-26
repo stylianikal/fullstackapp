@@ -47,7 +47,7 @@ I used 2 endpoints:
 We need only the city to fetch the data, validations for city
 
 GitHub Repository: 
-
+https://github.com/stylianikal/fullstackapp
 
 #3.     Potential Improvements:
 
